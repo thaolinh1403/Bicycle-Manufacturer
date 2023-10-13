@@ -22,7 +22,7 @@ left join `adventureworks2019.Production.Product` as b on a.ProductID=b.ProductI
 left join `adventureworks2019.Production.ProductSubcategory` as c on cast(b.ProductSubcategoryID as int)=c.ProductSubcategoryID
 group by 2,1
 order by 2,1
-),
+),     
 cte2 as (
 select cte1.period,
        cte1.Name as Name,
@@ -30,7 +30,7 @@ select cte1.period,
        lag (qty_item, 1) over(partition by cte1.Name order by cte1.period) as prv_qty 
 from cte1
 order by 2,1
-)
+)       
 select cte2.Name,
         cte2.qty_item,
         cte2.prv_qty,
